@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="109" id="KGk-i7-Jjw" customClass="CompetitionCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="M9t-qC-LqP">
+                        <rect key="frame" x="5" y="5" width="150" height="90"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="Ow7-aC-gYo"/>
+                            <constraint firstAttribute="width" constant="150" id="rkN-EH-qNm"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算机设计大赛" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIf-KM-Fym">
+                        <rect key="frame" x="165" y="16" width="189" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="numOfComment" translatesAutoresizingMaskIntoConstraints="NO" id="yuz-7o-zVx">
+                        <rect key="frame" x="165" y="74" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="8ll-QT-4nO"/>
+                            <constraint firstAttribute="height" constant="15" id="EMr-5q-GbX"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="numOfCellection" translatesAutoresizingMaskIntoConstraints="NO" id="X6J-wW-exM">
+                        <rect key="frame" x="256" y="74" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="15" id="1OA-xU-3h1"/>
+                            <constraint firstAttribute="width" constant="15" id="zIe-dS-H1b"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000人评论" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzJ-wk-K16">
+                        <rect key="frame" x="181" y="75" width="60" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收藏数:65" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2A-9b-DZs">
+                        <rect key="frame" x="272" y="75" width="51" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="X6J-wW-exM" firstAttribute="centerY" secondItem="yuz-7o-zVx" secondAttribute="centerY" id="51n-kG-Vz7"/>
+                    <constraint firstItem="M9t-qC-LqP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="8Je-Jd-Wns"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="KIf-KM-Fym" secondAttribute="trailing" constant="5" id="CnH-OL-ih7"/>
+                    <constraint firstItem="P2A-9b-DZs" firstAttribute="centerY" secondItem="yuz-7o-zVx" secondAttribute="centerY" id="Cyj-Xq-Edm"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="yuz-7o-zVx" secondAttribute="bottom" id="H2m-Z6-DQV"/>
+                    <constraint firstItem="KIf-KM-Fym" firstAttribute="leading" secondItem="M9t-qC-LqP" secondAttribute="trailing" constant="10" id="HIH-id-LsZ"/>
+                    <constraint firstItem="KIf-KM-Fym" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="MML-r7-azt"/>
+                    <constraint firstItem="HzJ-wk-K16" firstAttribute="leading" secondItem="yuz-7o-zVx" secondAttribute="trailing" constant="1" id="Ume-I9-4dB"/>
+                    <constraint firstItem="P2A-9b-DZs" firstAttribute="leading" secondItem="X6J-wW-exM" secondAttribute="trailing" constant="1" id="XU7-bu-aCF"/>
+                    <constraint firstItem="HzJ-wk-K16" firstAttribute="centerY" secondItem="yuz-7o-zVx" secondAttribute="centerY" id="akH-Tq-fr9"/>
+                    <constraint firstItem="yuz-7o-zVx" firstAttribute="leading" secondItem="M9t-qC-LqP" secondAttribute="trailing" constant="10" id="ao1-rP-kNW"/>
+                    <constraint firstItem="M9t-qC-LqP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="bWu-Hf-Az6"/>
+                    <constraint firstItem="X6J-wW-exM" firstAttribute="leading" secondItem="HzJ-wk-K16" secondAttribute="trailing" constant="15" id="lLQ-eC-jF5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="CompetitionImage" destination="M9t-qC-LqP" id="6da-wr-ba2"/>
+                <outlet property="name" destination="KIf-KM-Fym" id="0YN-7A-lMM"/>
+                <outlet property="numOfCollection" destination="P2A-9b-DZs" id="B2T-PT-ahi"/>
+                <outlet property="numOfComment" destination="HzJ-wk-K16" id="Gkq-vB-hP1"/>
+                <outlet property="theImageView" destination="M9t-qC-LqP" id="XBZ-1w-CKD"/>
+            </connections>
+            <point key="canvasLocation" x="63.200000000000003" y="77.361319340329842"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="defaultImage" width="225" height="135"/>
+        <image name="numOfCellection" width="32" height="32"/>
+        <image name="numOfComment" width="32" height="32"/>
+    </resources>
+</document>

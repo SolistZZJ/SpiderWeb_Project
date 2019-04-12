@@ -1,0 +1,5 @@
+project '/Users/solist/Library/Autosave Information/Cobweb/Cobweb.xcodeproj'
+platform :ios, '8.0'
+target "Cobweb" do
+pod 'ChatKit', '0.8.5'
+end

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>checkedinlist</key>
+	<dict>
+		<key>http://www.fwwb.org.cn/attached/video/20181011/20181011223349_612.mp4</key>
+		<string>/private/var/mobile/Containers/Data/Application/C59A6514-22CC-435E-9F8D-40B80468B323/tmp/WebKit/MediaCache/CachedMedia-m67LWY</string>
+	</dict>
+	<key>checkedoutlist</key>
+	<dict/>
+	<key>lastmodpid</key>
+	<integer>26</integer>
+	<key>lastmodtime</key>
+	<real>573498396.25417197</real>
+	<key>targetfilesize</key>
+	<integer>41943040</integer>
+	<key>targetsize</key>
+	<integer>52428800</integer>
+</dict>
+</plist>

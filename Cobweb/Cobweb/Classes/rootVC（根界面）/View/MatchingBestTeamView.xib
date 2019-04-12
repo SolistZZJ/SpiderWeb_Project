@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MatchingBestTeamView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="450"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPa-wh-hWC">
+                    <rect key="frame" x="5" y="5" width="365" height="50"/>
+                    <subviews>
+                        <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="通过小蛛的智能分析，推荐您加入以下队伍:" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W9S-kc-H4j">
+                            <rect key="frame" x="43" y="10" width="279" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="K6n-Z6-9eq"/>
+                                <constraint firstAttribute="width" constant="279" id="v8g-NU-7Qz"/>
+                            </constraints>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sXR-uC-lZ1">
+                            <rect key="frame" x="5" y="9" width="32" height="32"/>
+                            <state key="normal" image="returnBtn_normal"/>
+                            <connections>
+                                <action selector="backBtnClicked" destination="iN0-l3-epB" eventType="touchUpInside" id="xXD-bj-9Dt"/>
+                            </connections>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="littleSpider" translatesAutoresizingMaskIntoConstraints="NO" id="3u8-e6-dmc">
+                            <rect key="frame" x="326" y="0.0" width="39" height="37"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" red="0.79512165800000001" green="0.88220163650000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <constraints>
+                        <constraint firstItem="sXR-uC-lZ1" firstAttribute="leading" secondItem="JPa-wh-hWC" secondAttribute="leading" constant="5" id="2dZ-iq-3OJ"/>
+                        <constraint firstAttribute="height" constant="50" id="JKZ-2z-hyy"/>
+                        <constraint firstItem="W9S-kc-H4j" firstAttribute="centerX" secondItem="JPa-wh-hWC" secondAttribute="centerX" id="MyW-mu-iP3"/>
+                        <constraint firstItem="W9S-kc-H4j" firstAttribute="centerY" secondItem="JPa-wh-hWC" secondAttribute="centerY" id="Xkh-3J-xkk"/>
+                        <constraint firstItem="sXR-uC-lZ1" firstAttribute="centerY" secondItem="JPa-wh-hWC" secondAttribute="centerY" id="uA9-Ys-CUE"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="lDH-4P-mi9">
+                    <rect key="frame" x="0.0" y="60" width="375" height="390"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.79512165800000001" green="0.88220163650000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="JPa-wh-hWC" secondAttribute="trailing" constant="5" id="0to-qR-lp1"/>
+                <constraint firstItem="lDH-4P-mi9" firstAttribute="top" secondItem="JPa-wh-hWC" secondAttribute="bottom" constant="5" id="1nC-Yk-OM1"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="lDH-4P-mi9" secondAttribute="trailing" id="6v9-ae-uSQ"/>
+                <constraint firstItem="JPa-wh-hWC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="5" id="7TV-nN-sc5"/>
+                <constraint firstItem="JPa-wh-hWC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="5" id="FaT-hE-WeY"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="lDH-4P-mi9" secondAttribute="bottom" id="TIC-eZ-bUu"/>
+                <constraint firstItem="lDH-4P-mi9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="sW5-zX-Ne5"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="myTableView" destination="lDH-4P-mi9" id="zVd-mS-SDN"/>
+            </connections>
+            <point key="canvasLocation" x="130.40000000000001" y="153.82308845577214"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="littleSpider" width="128" height="128"/>
+        <image name="returnBtn_normal" width="32" height="32"/>
+    </resources>
+</document>

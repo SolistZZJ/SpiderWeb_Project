@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ReplyView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在回复" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7s-vi-Q2P">
+                    <rect key="frame" x="15" y="10" width="53.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="父评论" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UY1-JD-awv">
+                    <rect key="frame" x="73.5" y="9" width="46" height="18"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="dqQ-9j-ner">
+                    <rect key="frame" x="15" y="32" width="345" height="83"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0X1-DC-OSv">
+                    <rect key="frame" x="329" y="123" width="31" height="19"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="发送"/>
+                    <connections>
+                        <action selector="sendReplyBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="cD8-80-twm"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R5c-XP-Ydb">
+                    <rect key="frame" x="15" y="123" width="31" height="19"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="取消"/>
+                    <connections>
+                        <action selector="cancelBtnClick:" destination="iN0-l3-epB" eventType="touchUpInside" id="0Bn-cQ-tf0"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.92634264950824874" green="0.92186756424492389" blue="0.93081773477157359" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <constraints>
+                <constraint firstItem="R5c-XP-Ydb" firstAttribute="top" secondItem="dqQ-9j-ner" secondAttribute="bottom" constant="8" id="0Og-S0-Rwq"/>
+                <constraint firstItem="dqQ-9j-ner" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="24E-I5-CsZ"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="dqQ-9j-ner" secondAttribute="trailing" constant="15" id="2BV-98-zzV"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="0X1-DC-OSv" secondAttribute="bottom" constant="8" id="EVO-wU-HOV"/>
+                <constraint firstItem="R5c-XP-Ydb" firstAttribute="leading" secondItem="dqQ-9j-ner" secondAttribute="leading" id="Jdt-Rp-3Dd"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="dqQ-9j-ner" secondAttribute="bottom" constant="35" id="SQE-zz-fh0"/>
+                <constraint firstItem="UY1-JD-awv" firstAttribute="centerY" secondItem="m7s-vi-Q2P" secondAttribute="centerY" id="TK3-JT-YQG"/>
+                <constraint firstItem="0X1-DC-OSv" firstAttribute="top" secondItem="dqQ-9j-ner" secondAttribute="bottom" constant="8" id="VxG-Ka-bh8"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="R5c-XP-Ydb" secondAttribute="bottom" constant="8" id="cyx-GG-mRn"/>
+                <constraint firstItem="0X1-DC-OSv" firstAttribute="trailing" secondItem="dqQ-9j-ner" secondAttribute="trailing" id="gy4-hJ-DTm"/>
+                <constraint firstItem="m7s-vi-Q2P" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="hPg-dn-T7T"/>
+                <constraint firstItem="m7s-vi-Q2P" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="10" id="jW6-3s-ZUh"/>
+                <constraint firstItem="dqQ-9j-ner" firstAttribute="top" secondItem="UY1-JD-awv" secondAttribute="bottom" constant="5" id="va9-eR-16Y"/>
+                <constraint firstItem="UY1-JD-awv" firstAttribute="leading" secondItem="m7s-vi-Q2P" secondAttribute="trailing" constant="5" id="xSx-qI-p8I"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="fatherName" destination="UY1-JD-awv" id="3rf-Wk-qNV"/>
+                <outlet property="replyContent" destination="dqQ-9j-ner" id="lr3-Sh-aXC"/>
+            </connections>
+            <point key="canvasLocation" x="101.59999999999999" y="2.6986506746626691"/>
+        </view>
+    </objects>
+</document>

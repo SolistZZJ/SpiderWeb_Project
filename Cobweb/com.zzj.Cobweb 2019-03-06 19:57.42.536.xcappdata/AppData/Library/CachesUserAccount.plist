@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>creationTime</key>
+	<string>2019-03-06 19:50:36.673613+00:00</string>
+	<key>email</key>
+	<string>5356257276@qq.com</string>
+	<key>isAnonymous</key>
+	<true/>
+	<key>isTeacher</key>
+	<true/>
+	<key>major</key>
+	<string>计算机科学与技术</string>
+	<key>password</key>
+	<string>123</string>
+	<key>phone</key>
+	<string>1</string>
+	<key>profileImage</key>
+	<string>aImage</string>
+	<key>sex</key>
+	<string>男</string>
+	<key>university</key>
+	<string>武汉理工大学</string>
+	<key>userID</key>
+	<string>a</string>
+	<key>userName</key>
+	<string>Solist</string>
+</dict>
+</plist>
