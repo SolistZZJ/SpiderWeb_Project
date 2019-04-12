@@ -75,7 +75,7 @@
     UIImage *imageTmp=[UIImage imageNamed:@"allTeamRefresh1"];
     imageTmp=[self imageCompressFitSizeScale:imageTmp targetSize:CGSizeMake(60, 60)];
     [nomalImages addObject:imageTmp];
-    [self setImages:nomalImages forState:MJRefreshStateRefreshing];
+    [self setImages:nomalImages forState:MJRefreshStateIdle];
     
     // 设置即将刷新状态的动画图片和正在刷新状态的动画图片
     NSMutableArray *refreshingImages = [NSMutableArray array];
@@ -88,6 +88,7 @@
     [self setImages:refreshingImages forState:MJRefreshStatePulling];
     [self setImages:refreshingImages forState:MJRefreshStateRefreshing];
 }
+
 
 -(void)beginRefreshing{
     [super beginRefreshing];

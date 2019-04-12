@@ -90,6 +90,24 @@
         }
         !completionHandler ?: completionHandler([users copy], nil);
     }];
+    
+    
+    //查看数据库是否在Cache中，不在的话将mainbundle里的数据库复制进来
+    NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *dbPath=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
+    // 复制本地数据到沙盒中
+    NSFileManager *file_Manager = [NSFileManager defaultManager];
+    if (![file_Manager fileExistsAtPath:dbPath]) {
+        // 获得数据库文件在工程中的路径——源路径。
+        NSString *sourcesPath = [[NSBundle mainBundle] pathForResource:@"competition.db"ofType:nil];
+        NSError *error ;
+        if ([file_Manager copyItemAtPath:sourcesPath toPath:dbPath error:&error]) {
+            NSLog(@"数据库移动成功");
+        } else {
+            NSLog(@"数据库移动失败");
+        }
+    }
+    
 }
 
 //更新单例sharedUserModel

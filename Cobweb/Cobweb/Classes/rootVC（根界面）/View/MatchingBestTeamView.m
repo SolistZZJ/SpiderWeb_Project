@@ -31,7 +31,10 @@
 
 @implementation MatchingBestTeamView
 
--(void)layoutSubviews{
+
+-(void)awakeFromNib
+{
+    [super awakeFromNib];
     self.myTableView.delegate=self;
     self.myTableView.dataSource=self;
     //初始化数组

@@ -447,6 +447,7 @@
             else{
                 //操作成功
                 //字典数组转换为模型数组
+                
                 [TeamModel mj_setupObjectClassInArray:^NSDictionary *{
                     return @{@"captain":[UserModel class]};
                 }];
@@ -595,7 +596,7 @@
 
 #pragma mark - Table view data source
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-    return 0;
+    return 10;
 }
 
 

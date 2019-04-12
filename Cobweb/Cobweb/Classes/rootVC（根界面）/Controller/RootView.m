@@ -89,8 +89,9 @@
 //    NSString *doc=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 //    NSString *fileName=[doc stringByAppendingPathComponent:@"competition.db"];
 //    NSLog(@"%@",doc);
-    
-    NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+    NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
+//    NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
     
     const char *cFileName=fileName.UTF8String;
     int result=sqlite3_open(cFileName, &_db);
@@ -860,7 +861,9 @@
         //更新模型数据
         [self.cellArray removeAllObjects];
         //打开数据库
-        NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+        NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *fileName=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
+//        NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
         const char *cFileName=fileName.UTF8String;
         int result=sqlite3_open(cFileName, &_db);
         //查看用户最近浏览的比赛类型
@@ -992,6 +995,79 @@
     }
 
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    dispatch_queue_t queue =dispatch_queue_create("concurrent",DISPATCH_QUEUE_CONCURRENT);
+    dispatch_sync(queue, ^{
+        [self updateModelData_asyn];
+    });
+}
+
+-(void)updateModelData_asyn{
+    //更新模型数据
+    [self.cellArray removeAllObjects];
+    //打开数据库
+    NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
+//    NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+    const char *cFileName=fileName.UTF8String;
+    sqlite3_open(cFileName, &_db);
+    NSString *sql=@"select * from competition";
+    
+    sqlite3_stmt *stmt=nil;
+    int result=sqlite3_prepare_v2(self.db, [sql UTF8String], -1,&stmt, nil);
+    if(result==SQLITE_OK){
+        while (sqlite3_step(stmt)==SQLITE_ROW) {
+            const unsigned char *ID=sqlite3_column_text(stmt, 0);
+            NSString *modelID=[NSString stringWithUTF8String:(const char*)ID];
+            
+            const unsigned char *name=sqlite3_column_text(stmt, 1);
+            NSString *modelName=[NSString stringWithUTF8String:(const char*)name];
+            
+            const unsigned char *type=sqlite3_column_text(stmt, 2);
+            NSString *modelType=[NSString stringWithUTF8String:(const char*)type];
+            
+            const unsigned char *date=sqlite3_column_text(stmt, 3);
+            NSString *modelDate=[NSString stringWithUTF8String:(const char*)date];
+            
+            const unsigned char *numOfCollection=sqlite3_column_text(stmt, 4);
+            NSString *modelNumOfCollection=[NSString stringWithUTF8String:(const char*)numOfCollection];
+            
+            const unsigned char *numOfComment=sqlite3_column_text(stmt, 5);
+            NSString *modelNumOfComment=[NSString stringWithUTF8String:(const char*)numOfComment];
+            
+            const unsigned char *webpage=sqlite3_column_text(stmt, 6);
+            NSString *modelWebpage;
+            if(webpage==nil){
+                modelWebpage=@"";
+            }
+            else{
+                modelWebpage=[NSString stringWithUTF8String:(const char*)webpage];
+            }
+            const unsigned char *introduction=sqlite3_column_text(stmt, 7);
+            NSString *modelIntroduction=[NSString stringWithUTF8String:(const char*)introduction];
+            
+            CompetitionCellModel *tmp=[[CompetitionCellModel alloc]init];
+            tmp.ID=modelID;
+            tmp.image=modelID;
+            tmp.name=modelName;
+            tmp.type=modelType;
+            tmp.date=modelDate;
+            tmp.numOfCollection=modelNumOfCollection;
+            tmp.numOfComment=modelNumOfComment;
+            tmp.webpage=modelWebpage;
+            tmp.introduction=modelIntroduction;
+            [self.cellArray addObject:tmp];
+            NSLog(@"%@",modelName);
+        }
+        [self.tableView reloadData];
+    }
+    else{
+        NSLog(@"查询失败");
+    }
+    sqlite3_close(self.db);
+}
+
 -(void)viewWillDisappear:(BOOL)animated{
     [self closeMatchingView];
 }

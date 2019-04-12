@@ -18,6 +18,7 @@
 #import "ReplyView.h"
 #import "UserModel.h"
 #import "MoreReplyCell.h"
+#import <sqlite3.h>
 
 @interface CompetitionDetail () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *compName;
@@ -37,6 +38,9 @@
 
 @property(strong, nonatomic) NSMutableArray *commentArray;
 
+@property(strong, nonatomic) NSString *commentNum;
+@property(strong, nonatomic) NSString *collectNum;
+
 //子线程（下载图片）
 @property(strong,nonatomic) NSOperationQueue *queue;
 
@@ -53,6 +57,8 @@
     self.tabBarController.hidesBottomBarWhenPushed = NO;
     //self.tabBarController.tabBar.hidden = NO;
     self.bottomV.hidden=NO;
+    
+    [self updateCommentAndCollect];
 }
 
 -(void)viewWillDisappear:(BOOL)animated
@@ -64,6 +70,52 @@
     //self.tabBarController.tabBar.hidden = YES;
 }
 
+-(void)updateCommentAndCollect{
+    dispatch_queue_t queue =dispatch_queue_create("concurrent",DISPATCH_QUEUE_CONCURRENT);
+    dispatch_sync(queue, ^{
+        self.manager=[AFHTTPSessionManager manager];
+        //设置等待时间为20s
+        self.manager.requestSerializer.timeoutInterval=20.f;
+        NSDictionary *dict=@{@"competition":self.cellModel.ID};
+        [self.manager POST:[ipAddress stringByAppendingString:@"return_commentCount_and_collectCount/"] parameters:dict headers:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+            if([responseObject[@"status"] integerValue]==0 ){
+                NSLog(@"获取评论数和收藏数失败");
+            }
+            else{
+                NSDictionary* dict_info=responseObject[@"success_message"];
+                self.commentNum=dict_info[@"comment_count"];
+                self.collectNum=dict_info[@"collect_count"];
+                NSLog(@"%@,%@",self.commentNum,self.collectNum);
+                //存入本地sqlite数据库中
+                sqlite3 *db;
+                NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+                NSString *fileName=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
+//                NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+                const char *cFileName=fileName.UTF8String;
+                int result=sqlite3_open(cFileName, &db);
+                if(result==SQLITE_OK){
+                    NSLog(@"更新当前竞赛评论和收藏数时成功打开数据库");
+                    NSString *sql=[NSString stringWithFormat:@"update competition set comment_times=%@, collect_times=%@ where id=%@",self.commentNum,self.collectNum,self.cellModel.ID];
+                    char *errmsg=NULL;
+                    sqlite3_exec(db, sql.UTF8String, NULL, NULL, &errmsg);
+                    if(errmsg){
+                        NSLog(@"更新数据失败--%s",errmsg);
+                    }
+                    else{
+                        NSLog(@"更新数据成功");
+                        NSLog(@"%@", sql);
+                    }
+                    sqlite3_close(db);
+                }
+                else{
+                    NSLog(@"执行更新数据命令失败");
+                }
+            }
+        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+            NSLog(@"获取评论数和收藏数失败");
+        }];
+    });
+}
 
 -(void)updateCollectInfo{
     if([UserModel sharedInstance].isAnonymous){
@@ -167,6 +219,8 @@
                     self.hud.labelText=@"已取消收藏！";
                     NSLog(@"取消收藏成功！");
                 }
+                //更新主页面的收藏数
+                [self updateCommentAndCollect];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     [MBProgressHUD hideHUDForView:window animated:YES];
                 });
@@ -309,6 +363,9 @@
     [self.commentView.contentTextView resignFirstResponder];
     [self.replyView.replyContent resignFirstResponder];
     [self.test resignFirstResponder];
+    
+    //更新主页面的评论数
+    [self updateCommentAndCollect];
 }
 
 //-(void)showMoreReplyView:(NSNotification *) notification{
