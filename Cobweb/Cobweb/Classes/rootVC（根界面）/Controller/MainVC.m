@@ -27,8 +27,6 @@
     
     
     
-    
-    
     //NSLog(@"%@",NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES));
     
     //从plist中读取账号信息

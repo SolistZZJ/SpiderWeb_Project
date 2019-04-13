@@ -67,7 +67,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="80" id="RSk-9P-cgf"/>
                         </constraints>
-                        <state key="normal" title="邀请入队">
+                        <state key="normal" title="允许入队">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <connections>

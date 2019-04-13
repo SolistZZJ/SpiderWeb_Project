@@ -294,7 +294,7 @@
 
     searchTextField.backgroundColor=[UIColor grayColor];
     searchTextField.alpha=0.5;
-    self.searchBar.placeholder=@"填写队伍名/队长名";
+    self.searchBar.placeholder=@"填写队伍名/队长名/比赛名";
     UITextField * searchField = [_searchBar valueForKey:@"_searchField"];
     [searchField setValue:[UIColor whiteColor] forKeyPath:@"_placeholderLabel.textColor"];
     [searchField setValue:[UIFont boldSystemFontOfSize:12] forKeyPath:@"_placeholderLabel.font"];

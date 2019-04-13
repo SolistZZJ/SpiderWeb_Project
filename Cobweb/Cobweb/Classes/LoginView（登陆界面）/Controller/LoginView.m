@@ -81,8 +81,7 @@
                 
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     //更新账号数据，存入缓存
-                    NSDictionary *dict=responseObject[@"success_message"];
-                    
+                    NSMutableDictionary *dict=responseObject[@"success_message"];
                     [self updateUserMethod:dict];
                     NSLog(@"%@",[UserModel sharedInstance].userName);
                     
@@ -165,9 +164,10 @@
     self.updatedUserInfo.creationTime=dict[@"creationTime"];
     self.updatedUserInfo.profileImage=dict[@"profileImage"];
     self.updatedUserInfo.sex=dict[@"sex"];
-    self.updatedUserInfo.hobbies=dict[@"hobbies"];
+    self.updatedUserInfo.hobbies=dict[@"hobby"];
     self.updatedUserInfo.phone=dict[@"phone"];
     self.updatedUserInfo.isAnonymous=[dict[@"isAnonymous"] boolValue];
+    
 }
 
 -(void)downloadImage:(NSString *)urlString{

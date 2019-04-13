@@ -67,6 +67,13 @@
             sql=[[sql stringByAppendingString:@" or id="]stringByAppendingString:[competition_favor[i] description]];
         }
     }
+    if([UserModel sharedInstance].hobbies.count>0){
+        for(int i=0;i<[UserModel sharedInstance].hobbies.count;++i){
+            sql=[[[sql stringByAppendingString:@" or type like '%"] stringByAppendingString:[UserModel sharedInstance].hobbies[i]] stringByAppendingString:@"%'"];
+            sql=[[[sql stringByAppendingString:@" or name like '%"] stringByAppendingString:[UserModel sharedInstance].hobbies[i]] stringByAppendingString:@"%'"];
+        }
+    }
+    NSLog(@"%@",sql);
     sqlite3_stmt *stmt=nil;
     result=sqlite3_prepare_v2(self.db, [sql UTF8String], -1,&stmt, nil);
     if(result==SQLITE_OK){

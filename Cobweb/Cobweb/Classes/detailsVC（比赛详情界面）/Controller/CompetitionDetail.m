@@ -322,12 +322,12 @@
                 
 //                NSURL *url=[NSURL URLWithString:[[@"http://119.23.190.159:8000/static/compress_images/" stringByAppendingString:tmpModel.user] stringByAppendingString:@"Image.png"]];
                 
-                NSURL *url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/compress_images/"] stringByAppendingString:tmpModel.user]stringByAppendingString:@"Image.png"]];
+                NSURL *url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/profiles/"] stringByAppendingString:tmpModel.user]stringByAppendingString:@"Image.png"]];
                 NSData *imageData=[NSData dataWithContentsOfURL:url];
                 
                 if(tmpModel.children.count!=0){
 //                    url=[NSURL URLWithString:[[@"http://119.23.190.159:8000/static/compress_images/" stringByAppendingString:(tmpModel.children[0])[@"user"]] stringByAppendingString:@"Image.png"]];
-                    url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/compress_images/"] stringByAppendingString:(tmpModel.children[0])[@"user"]] stringByAppendingString:@"Image.png"]];
+                    url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/profiles/"] stringByAppendingString:(tmpModel.children[0])[@"user"]] stringByAppendingString:@"Image.png"]];
                     NSData *imageData2=[NSData dataWithContentsOfURL:url];
                     tmpModel.childProfile=imageData2;
                 }

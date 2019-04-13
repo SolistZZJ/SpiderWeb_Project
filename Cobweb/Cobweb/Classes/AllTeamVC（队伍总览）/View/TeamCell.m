@@ -120,7 +120,7 @@
         //开子线程下载图片
         self.queue=[[NSOperationQueue alloc]init];
         NSBlockOperation *download=[NSBlockOperation blockOperationWithBlock:^{
-            NSURL *url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/compress_images/"]stringByAppendingString:teamModel.captain.userID]stringByAppendingString:@"Image.png"]];
+            NSURL *url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/profiles/"]stringByAppendingString:teamModel.captain.userID]stringByAppendingString:@"Image.png"]];
             
             NSData *imageData=[NSData dataWithContentsOfURL:url];
             UIImage *image=[UIImage imageWithData:imageData];

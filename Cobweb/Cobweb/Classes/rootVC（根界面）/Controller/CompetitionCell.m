@@ -27,7 +27,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     //self.name.font=[UIFont fontWithName:@"创艺简中圆" size:14];
-    self.theImageView.layer.cornerRadius=25;
+    self.theImageView.layer.cornerRadius=10;
     self.theImageView.layer.masksToBounds=YES;
     // Initialization code
     
@@ -54,6 +54,12 @@
 
 }
 
-
+-(void)setFrame:(CGRect)frame
+{
+    frame.origin.x = 3;
+    frame.size.width -= 2 * frame.origin.x;
+    frame.size.height -= 2 * frame.origin.x;
+    [super setFrame:frame];
+}
 
 @end

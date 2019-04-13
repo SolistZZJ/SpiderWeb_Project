@@ -203,7 +203,7 @@
     if(self.teamModel.isAllTeam){
         self.applyListBtn.hidden=YES;
         self.joinChatBtn.hidden=YES;
-        self.teamManageBtn.hidden=YES;
+        //self.teamManageBtn.hidden=YES;
     }
     else{
         self.applyBtn.hidden=YES;
@@ -214,6 +214,7 @@
     }
 }
 
+    
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return 1;

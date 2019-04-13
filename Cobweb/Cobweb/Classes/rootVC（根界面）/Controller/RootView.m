@@ -23,7 +23,7 @@
 
 @interface RootView ()<UISearchBarDelegate>
 
-
+@property (strong,nonatomic) NSMutableArray *typeArray;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *topicScrollView;
 
@@ -149,6 +149,25 @@
         else{
             NSLog(@"查询失败");
         }
+        
+        sql=@"select distinct type from competition";
+        stmt=nil;
+        result=sqlite3_prepare_v2(self.db, [sql UTF8String], -1,&stmt, nil);
+        if(result==SQLITE_OK){
+            NSLog(@"查询成功");
+            NSMutableArray *tmpArray=[NSMutableArray array];
+            while (sqlite3_step(stmt)==SQLITE_ROW){
+                const unsigned char *ID=sqlite3_column_text(stmt, 0);
+                NSString *type=[NSString stringWithUTF8String:(const char*)ID];
+                [tmpArray addObject:type];
+            }
+            self.typeArray=tmpArray;
+        }
+        else{
+            NSLog(@"查询失败");
+        }
+        NSLog(@"%@",self.typeArray[0]);
+        
         sqlite3_close(self.db);
     }
     else{
@@ -207,73 +226,89 @@
     [self.topicScrollView addSubview:allBtn];
     allBtn.enabled=NO;
     
-    //ITBtn初始化
-    UIButton *ITBtn=[[UIButton alloc]initWithFrame:CGRectMake(firstX+60+20, Y, 150, BtnH)];
-    [self initBtn:ITBtn title:@"计算机与互联网"];
-    [ITBtn addTarget:self action:@selector(clickITBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:ITBtn];
+    //所有其他按钮初始化
+    UIButton *typeBtn=[[UIButton alloc]initWithFrame:allBtn.frame];
+    for(int i=0;i<self.typeArray.count;++i){
+        if([self.typeArray[i] isEqualToString:@"计算机与互联网"]){
+            typeBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(typeBtn.frame)+20, Y, 150, BtnH)];
+        }
+        else{
+            typeBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(typeBtn.frame)+20, Y, 90, BtnH)];
+        }
+        typeBtn.tag=500+i;
+        [self initBtn:typeBtn title:self.typeArray[i]];
+        [typeBtn addTarget:self action:@selector(clickTypeBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.topicScrollView addSubview:typeBtn];
+    }
     
-    //SUBBtn（创业）初始化
-    UIButton *SUBBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(ITBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:SUBBtn title:@"创业大赛"];
-    [SUBBtn addTarget:self action:@selector(clickSUBBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:SUBBtn];
+//    //ITBtn初始化
+//    UIButton *ITBtn=[[UIButton alloc]initWithFrame:CGRectMake(firstX+60+20, Y, 150, BtnH)];
+//    [self initBtn:ITBtn title:@"计算机与互联网"];
+//    [ITBtn addTarget:self action:@selector(clickITBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:ITBtn];
+//
+//    //SUBBtn（创业）初始化
+//    UIButton *SUBBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(ITBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:SUBBtn title:@"创业大赛"];
+//    [SUBBtn addTarget:self action:@selector(clickSUBBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:SUBBtn];
+//
+//    //saleBtn(科技大赛)初始化
+//    UIButton *techBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(SUBBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:techBtn title:@"科技大赛"];
+//    [techBtn addTarget:self action:@selector(clickTechBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:techBtn];
+//
+//    //financeBtn(金融比赛)初始化
+//    UIButton *financeBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(techBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:financeBtn title:@"金融比赛"];
+//    [financeBtn addTarget:self action:@selector(clickFinanceBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:financeBtn];
+//
+//    //scienceBtn(学科学术)初始化
+//    UIButton *scienceBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(financeBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:scienceBtn title:@"学科学术"];
+//    [scienceBtn addTarget:self action:@selector(clickScienceBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:scienceBtn];
+//
+//    //animationBtn(动漫书画)初始化
+//    UIButton *animationBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(scienceBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:animationBtn title:@"动漫书画"];
+//    [animationBtn addTarget:self action:@selector(clickAnimationBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:animationBtn];
+//
+//    //speechBtn(动漫书画)初始化
+//    UIButton *speechBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(animationBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:speechBtn title:@"动漫书画"];
+//    [speechBtn addTarget:self action:@selector(clickSpeechBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:speechBtn];
+//
+//    //ADBtn(广告创意)初始化
+//    UIButton *ADBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(speechBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:ADBtn title:@"广告创意"];
+//    [ADBtn addTarget:self action:@selector(clickADBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:ADBtn];
+//
+//    //publicBtn(公益大赛)初始化
+//    UIButton *publicBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(ADBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:publicBtn title:@"公益大赛"];
+//    [publicBtn addTarget:self action:@selector(clickPublicBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:publicBtn];
+//
+//    //designBtn（设计大赛）初始化
+//    UIButton *designBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(publicBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:designBtn title:@"设计大赛"];
+//    [designBtn addTarget:self action:@selector(clickDesignBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:designBtn];
+//
+//    //movieBtn(影视摄影)初始化
+//    UIButton *movieBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(designBtn.frame)+20, Y, 90, BtnH)];
+//    [self initBtn:movieBtn title:@"影视摄影"];
+//    [movieBtn addTarget:self action:@selector(clickMovieBtn:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.topicScrollView addSubview:movieBtn];
     
-    //saleBtn(科技大赛)初始化
-    UIButton *techBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(SUBBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:techBtn title:@"科技大赛"];
-    [techBtn addTarget:self action:@selector(clickTechBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:techBtn];
-    
-    //financeBtn(金融比赛)初始化
-    UIButton *financeBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(techBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:financeBtn title:@"金融比赛"];
-    [financeBtn addTarget:self action:@selector(clickFinanceBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:financeBtn];
-    
-    //scienceBtn(学科学术)初始化
-    UIButton *scienceBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(financeBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:scienceBtn title:@"学科学术"];
-    [scienceBtn addTarget:self action:@selector(clickScienceBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:scienceBtn];
-    
-    //animationBtn(动漫书画)初始化
-    UIButton *animationBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(scienceBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:animationBtn title:@"动漫书画"];
-    [animationBtn addTarget:self action:@selector(clickAnimationBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:animationBtn];
-    
-    //speechBtn(动漫书画)初始化
-    UIButton *speechBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(animationBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:speechBtn title:@"动漫书画"];
-    [speechBtn addTarget:self action:@selector(clickSpeechBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:speechBtn];
-    
-    //ADBtn(动漫书画)初始化
-    UIButton *ADBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(speechBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:ADBtn title:@"广告创意"];
-    [ADBtn addTarget:self action:@selector(clickADBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:ADBtn];
-    
-    //publicBtn(公益大赛)初始化
-    UIButton *publicBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(ADBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:publicBtn title:@"公益大赛"];
-    [publicBtn addTarget:self action:@selector(clickPublicBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:publicBtn];
-    
-    //designBtn（设计大赛）初始化
-    UIButton *designBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(publicBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:designBtn title:@"设计大赛"];
-    [designBtn addTarget:self action:@selector(clickDesignBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:designBtn];
-    
-    //movieBtn(影视摄影)初始化
-    UIButton *movieBtn=[[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(designBtn.frame)+20, Y, 90, BtnH)];
-    [self initBtn:movieBtn title:@"影视摄影"];
-    [movieBtn addTarget:self action:@selector(clickMovieBtn:) forControlEvents:UIControlEventTouchUpInside];
-    [self.topicScrollView addSubview:movieBtn];
-    
-    self.topicScrollView.contentSize=CGSizeMake(CGRectGetMaxX(movieBtn.frame)+20, self.topicScrollView.frame.size.height);
+//    self.topicScrollView.contentSize=CGSizeMake(CGRectGetMaxX(movieBtn.frame)+20, self.topicScrollView.frame.size.height);
+    self.topicScrollView.contentSize=CGSizeMake(CGRectGetMaxX(typeBtn.frame)+20, self.topicScrollView.frame.size.height);
 }
 
 -(void)initBtn:(UIButton *)btn title:(NSString *)title {
@@ -289,7 +324,9 @@
     //更新模型数据
     [self.cellArray removeAllObjects];
     //打开数据库
-    NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+    NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
+//    NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
     const char *cFileName=fileName.UTF8String;
     sqlite3_open(cFileName, &_db);
     NSString *sql=[NSString stringWithFormat:@"select * from competition where type='%@'",type];
@@ -340,6 +377,8 @@
             [self.cellArray addObject:tmp];
             NSLog(@"%@",modelName);
         }
+//        NSArray *tmpArr=[self.cellArray copy];
+//        self.cellArray=[self getRandomArrFrome:tmpArr];
         [self.tableView reloadData];
     }
     else{
@@ -397,6 +436,8 @@
             tmp.webpage=modelWebpage;
             [self.cellArray addObject:tmp];
         }
+        NSArray *tmpArr=[self.cellArray copy];
+        self.cellArray=[self getRandomArrFrome:tmpArr];
         [self.tableView reloadData];
     }
     else{
@@ -404,83 +445,108 @@
     }
 }
 
--(void)clickITBtn:(UIButton *)btn {
+-(NSMutableArray*)getRandomArrFrome:(NSArray*)arr
+{
+    NSMutableArray *newArr = [NSMutableArray new];
+    while (newArr.count != arr.count) {
+        //生成随机数
+        int x =arc4random() % arr.count;
+        id obj = arr[x];
+        if (![newArr containsObject:obj]) {
+            [newArr addObject:obj];
+        }
+    }
+    return newArr;
+}
+
+
+
+
+-(void)clickTypeBtn:(UIButton *)btn {
     [self updateBtn:self.btnArr];
     btn.enabled=NO;
     
     //更新模型数据
-    [self updateModelData:@"计算机与互联网"];
+    [self updateModelData:self.typeArray[btn.tag-500]];
 }
 
--(void)clickSUBBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"创业大赛"];
-}
-
--(void)clickTechBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"科技大赛"];
-}
-
--(void)clickFinanceBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"金融比赛"];
-}
-
--(void)clickScienceBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"学科学术"];
-}
-
--(void)clickAnimationBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"动漫书画"];
-}
-
--(void)clickSpeechBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"文学演讲"];
-}
-
--(void)clickADBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"广告创意"];
-}
-
--(void)clickPublicBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"公益大赛"];
-}
-
--(void)clickDesignBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"设计大赛"];
-}
-
--(void)clickMovieBtn:(UIButton *)btn {
-    [self updateBtn:self.btnArr];
-    btn.enabled=NO;
-    //更新模型数据
-    [self updateModelData:@"影视摄影"];
-}
+//-(void)clickITBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//
+//    //更新模型数据
+//    [self updateModelData:@"计算机与互联网"];
+//}
+//
+//-(void)clickSUBBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"创业大赛"];
+//}
+//
+//-(void)clickTechBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"科技大赛"];
+//}
+//
+//-(void)clickFinanceBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"金融比赛"];
+//}
+//
+//-(void)clickScienceBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"学科学术"];
+//}
+//
+//-(void)clickAnimationBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"动漫书画"];
+//}
+//
+//-(void)clickSpeechBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"文学演讲"];
+//}
+//
+//-(void)clickADBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"广告创意"];
+//}
+//
+//-(void)clickPublicBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"公益大赛"];
+//}
+//
+//-(void)clickDesignBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"设计大赛"];
+//}
+//
+//-(void)clickMovieBtn:(UIButton *)btn {
+//    [self updateBtn:self.btnArr];
+//    btn.enabled=NO;
+//    //更新模型数据
+//    [self updateModelData:@"影视摄影"];
+//}
 
 -(void)updateBtn:(NSArray *)btnArr {
     for (UIButton* btn in btnArr) {
@@ -512,7 +578,9 @@
     //若打开了寻队窗口则关闭
     [self closeMatchingView];
     [self.searchBar resignFirstResponder];
-    NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+    NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
+//    NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
     const char *cFileName=fileName.UTF8String;
     int result=sqlite3_open(cFileName, &_db);
     if(result==SQLITE_OK){
@@ -692,10 +760,18 @@
 //            cell.selectionStyle=UITableViewCellSelectionStyleDefault;
 //            cell.userInteractionEnabled=YES;
 //        }
-        
+        cell.layer.cornerRadius = 10;
+        cell.layer.masksToBounds = YES;
         return cell;
     }
     return [super tableView:tableView cellForRowAtIndexPath:indexPath];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 0.1;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    return 7;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -854,7 +930,7 @@
 
 
 
-
+//智能推荐
 - (IBAction)recommend {
     if(![UserModel sharedInstance].isAnonymous){
         //根据用户注册时选择的爱好以及最近浏览的来进行推荐
@@ -907,10 +983,14 @@
                 sql=[[[sql stringByAppendingString:@" or type='"]stringByAppendingString:[typeArr[i] description]] stringByAppendingString:@"'"];
             }
         }
-        for(int i=0;i<[UserModel sharedInstance].hobbies.count;++i){
-            sql=[[[sql stringByAppendingString:@" or name like'%%"]stringByAppendingString:[[UserModel sharedInstance].hobbies[i] description]] stringByAppendingString:@"%%'"];
-            NSLog(@"***%@***,",[UserModel sharedInstance].hobbies[i]);
+        if([UserModel sharedInstance].hobbies.count>0){
+            for(int i=0;i<[UserModel sharedInstance].hobbies.count;++i){
+                sql=[[[sql stringByAppendingString:@" or name like '%"]stringByAppendingString:[[UserModel sharedInstance].hobbies[i] description]] stringByAppendingString:@"%'"];
+                sql=[[[sql stringByAppendingString:@" or type like '%"]stringByAppendingString:[[UserModel sharedInstance].hobbies[i] description]] stringByAppendingString:@"%'"];
+                NSLog(@"***%@***,",[UserModel sharedInstance].hobbies[i]);
+            }
         }
+        NSLog(@"%@",sql);
         stmt=nil;
         result=sqlite3_prepare_v2(self.db, [sql UTF8String], -1,&stmt, nil);
         if(result==SQLITE_OK){
@@ -958,6 +1038,8 @@
                 NSLog(@"%@",modelName);
             }
             [self updateBtn:self.btnArr];
+            NSArray *tmpArr=[self.cellArray copy];
+            self.cellArray=[self getRandomArrFrome:tmpArr];
             [self.tableView reloadData];
         }
         else{
@@ -1060,6 +1142,8 @@
             [self.cellArray addObject:tmp];
             NSLog(@"%@",modelName);
         }
+        NSArray *tmpArr=[self.cellArray copy];
+        self.cellArray=[self getRandomArrFrome:tmpArr];
         [self.tableView reloadData];
     }
     else{

@@ -190,7 +190,7 @@
             //更新子评论头像
 //            NSURL *url=[NSURL URLWithString:[[@"http://119.23.190.159:8000/static/compress_images/" stringByAppendingString:model.user] stringByAppendingString:@"Image.png"]];
             
-            NSURL *url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/compress_images/"] stringByAppendingString:model.user]stringByAppendingString:@"Image.png"]];
+            NSURL *url=[NSURL URLWithString:[[[ipAddress stringByAppendingString:@"static/profiles/"] stringByAppendingString:model.user]stringByAppendingString:@"Image.png"]];
             NSData *imageData=[NSData dataWithContentsOfURL:url];
             model.profile=imageData;
             [tmpArr addObject:model];

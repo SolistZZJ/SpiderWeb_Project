@@ -165,6 +165,10 @@
 //        [[NSNotificationCenter defaultCenter]postNotificationName:@"replyChild" object:nil];
 //    }
     MoreReplyCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    NSLog(@"%@",cell.commentModel.root);
+    if([cell.commentModel.root isKindOfClass:[NSNull class]] ){
+        cell.commentModel.root=cell.commentModel.commentId;
+    }
     [[NSNotificationCenter defaultCenter]postNotificationName:@"replyChild" object:cell];
 }
 

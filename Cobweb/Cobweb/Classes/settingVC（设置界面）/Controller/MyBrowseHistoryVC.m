@@ -63,7 +63,9 @@
         NSInteger cmpCount=self.cmpArray.count;
         if(cmpCount>0){
             //从sqlite数据库找到匹配的比赛Model
-            NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+//            NSString *fileName=[[NSBundle mainBundle]pathForResource:@"competition.db" ofType:nil];
+            NSString *dbRootPath=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *fileName=[dbRootPath stringByAppendingPathComponent:@"competition.db"];
             const char *cFileName=fileName.UTF8String;
             int result=sqlite3_open(cFileName, &_db);
             if(result==SQLITE_OK){

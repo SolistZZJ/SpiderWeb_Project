@@ -20,40 +20,40 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultImage" translatesAutoresizingMaskIntoConstraints="NO" id="M9t-qC-LqP">
-                        <rect key="frame" x="5" y="5" width="150" height="90"/>
+                        <rect key="frame" x="0.0" y="5" width="150" height="90"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="90" id="Ow7-aC-gYo"/>
                             <constraint firstAttribute="width" constant="150" id="rkN-EH-qNm"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="计算机设计大赛" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIf-KM-Fym">
-                        <rect key="frame" x="165" y="16" width="189" height="17"/>
+                        <rect key="frame" x="160" y="16" width="194" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="numOfComment" translatesAutoresizingMaskIntoConstraints="NO" id="yuz-7o-zVx">
-                        <rect key="frame" x="165" y="74" width="15" height="15"/>
+                        <rect key="frame" x="160" y="74" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="8ll-QT-4nO"/>
                             <constraint firstAttribute="height" constant="15" id="EMr-5q-GbX"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="numOfCellection" translatesAutoresizingMaskIntoConstraints="NO" id="X6J-wW-exM">
-                        <rect key="frame" x="256" y="74" width="15" height="15"/>
+                        <rect key="frame" x="251" y="74" width="15" height="15"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="15" id="1OA-xU-3h1"/>
                             <constraint firstAttribute="width" constant="15" id="zIe-dS-H1b"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000人评论" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HzJ-wk-K16">
-                        <rect key="frame" x="181" y="75" width="60" height="13.5"/>
+                        <rect key="frame" x="176" y="75" width="60" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收藏数:65" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2A-9b-DZs">
-                        <rect key="frame" x="272" y="75" width="51" height="13.5"/>
+                        <rect key="frame" x="267" y="75" width="51" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <color key="textColor" red="0.43529412150000002" green="0.4431372583" blue="0.47450980539999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -71,7 +71,7 @@
                     <constraint firstItem="P2A-9b-DZs" firstAttribute="leading" secondItem="X6J-wW-exM" secondAttribute="trailing" constant="1" id="XU7-bu-aCF"/>
                     <constraint firstItem="HzJ-wk-K16" firstAttribute="centerY" secondItem="yuz-7o-zVx" secondAttribute="centerY" id="akH-Tq-fr9"/>
                     <constraint firstItem="yuz-7o-zVx" firstAttribute="leading" secondItem="M9t-qC-LqP" secondAttribute="trailing" constant="10" id="ao1-rP-kNW"/>
-                    <constraint firstItem="M9t-qC-LqP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="bWu-Hf-Az6"/>
+                    <constraint firstItem="M9t-qC-LqP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="bWu-Hf-Az6"/>
                     <constraint firstItem="X6J-wW-exM" firstAttribute="leading" secondItem="HzJ-wk-K16" secondAttribute="trailing" constant="15" id="lLQ-eC-jF5"/>
                 </constraints>
             </tableViewCellContentView>
